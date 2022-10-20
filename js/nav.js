@@ -34,3 +34,40 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+console.log("Nav JS");
+
+// START MY CODE - Add Event Listener to Navbar: Submit, Favorites, My Stories
+
+// Event Listener - Submit
+//onClick, it needs to show form so user can add a story
+//Form contains 3 inputs (Author, Title, URL) and a submit <button>
+// Form appears in <section> element with class of . stories-container container
+$(".submit-story-form").hide();
+$(".nav-submit").on("click", function () {
+  $(".submit-story-form").show();
+
+  $("submit-story-btn").on("click", function (e) {
+    // need to POST the Submit Story form submission data to DB
+    //Instead of "function", do I invoke an existing function posts this data to DB?
+    //Is this the function to invoke: addStory() See models.js line 74
+  });
+});
+
+// Event Listener - Favorites
+//Need to create functiality that allows user to mark stories as a favorite
+//on click, it need to show a list of user's favorite stories
+//If text of favorites === undefined, set it to "No Favorites Added."
+//Favorites are added to .stories-container container
+//Favorits list is posted to
+$(".nav-favorites").on("click", function () {
+  // alert("I clicked Favorites");
+});
+
+// Event Listener - My Stories
+//// If text  of My Stories === undefined, set it to "No Stories Added."
+
+$(".nav-my-stories").on("click", function () {
+  alert("I clicked My Stories");
+});
+
+// END MY CODE code for Submit Story Form

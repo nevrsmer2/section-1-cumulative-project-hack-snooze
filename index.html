@@ -38,9 +38,9 @@
       </div>
       <!-- Middle Links -->
       <div class="navbar-mid">
-        <a href="#" class="nav-link">Submit</a>
-        <a href="#" class="nav-link">Favorites</a>
-        <a href="#" class="nav-link">My Stories</a>
+        <a href="#" class="nav-link nav-submit">Submit</a>
+        <a href="#" class="nav-link nav-favorites">Favorites</a>
+        <a href="#" class="nav-link nav-my-stories">My Stories</a>
       </div>
       <!-- Right links -->
       <div class="nav-right">
@@ -52,6 +52,32 @@
 
     <!-- area for stories (all stories, user stories, favorites) -->
     <section class="stories-container container">
+      <!-- Start: My code for Submit story form -->
+      <form
+        action="#"
+        id="submit-story-form"
+        class="submit-story-form"
+        method="post"
+      >
+        <div class="submit-story-author">
+          <label for="author-name">Author: </label>
+          <input id="author-name" placeholder="Author Name" />
+        </div>
+
+        <div class="submit-story-title">
+          <label for="story-title">Title: </label>
+          <input id="story-title" placeholder="Story Title" />
+        </div>
+
+        <div class="submit-story-url">
+          <label for="story-url">URL: </label>
+          <input id="story-url" placeholder="Story URL" />
+        </div>
+
+        <button type="submit" class="submit-story-btn">Submit Story</button>
+      </form>
+      <!-- End: My code for Submit story form -->
+
       <!-- loading message (removed by JS after stories loaded) -->
       <div id="stories-loading-msg">Loading&hellip;</div>
 
