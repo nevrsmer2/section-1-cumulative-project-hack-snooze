@@ -55,26 +55,37 @@
       <!-- Start: My code for Submit story form -->
       <form
         action="#"
+        method="post"
         id="submit-story-form"
         class="submit-story-form"
-        method="post"
       >
         <div class="submit-story-author">
           <label for="author-name">Author: </label>
-          <input id="author-name" placeholder="Author Name" />
+          <input
+            id="author-name"
+            type="text"
+            placeholder="Author Name"
+            required
+          />
         </div>
 
         <div class="submit-story-title">
           <label for="story-title">Title: </label>
-          <input id="story-title" placeholder="Story Title" />
+          <input
+            type="text"
+            id="story-title"
+            placeholder="Story Title"
+            required
+          />
         </div>
 
         <div class="submit-story-url">
           <label for="story-url">URL: </label>
-          <input id="story-url" placeholder="Story URL" />
+          <input type="url" id="story-url" placeholder="Story URL" required />
         </div>
 
         <button type="submit" class="submit-story-btn">Submit Story</button>
+        <hr />
       </form>
       <!-- End: My code for Submit story form -->
 

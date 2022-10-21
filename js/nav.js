@@ -45,12 +45,6 @@ console.log("Nav JS");
 $(".submit-story-form").hide();
 $(".nav-submit").on("click", function () {
   $(".submit-story-form").show();
-
-  $("submit-story-btn").on("click", function (e) {
-    // need to POST the Submit Story form submission data to DB
-    //Instead of "function", do I invoke an existing function posts this data to DB?
-    //Is this the function to invoke: addStory() See models.js line 74
-  });
 });
 
 // Event Listener - Favorites
