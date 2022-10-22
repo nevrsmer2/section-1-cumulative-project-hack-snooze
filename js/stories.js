@@ -25,7 +25,8 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <a href="${story.url}" target="a_blank" class="story-link">
+<i class="fa-star ${isFavorite(story) ? "fas" : "far"}"></i>
+      <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
@@ -72,3 +73,37 @@ async function submitStory(e) {
   $(".submit-story-form")[0].reset();
   $(".submit-story-form").hide();
 }
+
+async function renderMyStories() {
+  currentUser.ownStories;
+  $allStoriesList.empty();
+  $(".submit-story-form").hide();
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of currentUser.ownStories) {
+    const $story = generateStoryMarkup(story);
+    $allStoriesList.append($story);
+  }
+
+  $allStoriesList.show();
+  console.log("Current User:", currentUser);
+}
+
+//Return boolean to
+function isFavorite(story) {
+  let isFav = false;
+  currentUser.favorites.forEach(function (fav) {
+    if (story.storyId === fav.storyId) {
+      isFav = true;
+    }
+  });
+  return isFav;
+}
+
+//Show star based on ...
+function updateFavorite(e) {
+  console.log("E:", $(e.target).hasClass("fas"));
+}
+
+//Add event listener to star element and call updaeFavorite function
+$allStoriesList.on("click", ".fa-star", updateFavorite);

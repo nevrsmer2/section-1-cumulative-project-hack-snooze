@@ -61,7 +61,9 @@ $(".nav-favorites").on("click", function () {
 //// If text  of My Stories === undefined, set it to "No Stories Added."
 
 $(".nav-my-stories").on("click", function () {
-  alert("I clicked My Stories");
+  hidePageComponents();
+  renderMyStories();
+  // alert("I clicked My Stories");
 });
 
 // END MY CODE code for Submit Story Form
