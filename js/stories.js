@@ -89,7 +89,7 @@ async function renderMyStories() {
   console.log("Current User:", currentUser);
 }
 
-//Return boolean to
+//Return boolean based on star's status - marked or not marked as favorite
 function isFavorite(story) {
   let isFav = false;
   currentUser.favorites.forEach(function (fav) {
@@ -107,3 +107,18 @@ function updateFavorite(e) {
 
 //Add event listener to star element and call updaeFavorite function
 $allStoriesList.on("click", ".fa-star", updateFavorite);
+
+// Function to render user's favorite stories (copied from a bov e)
+async function myFavStories() {
+  currentUser.favorites;
+  $allStoriesList.empty();
+  $(".submit-story-form").hide();
+
+  // loop through all of our stories in favorites [] and push them to the DOM
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $allStoriesList.append($story);
+  }
+
+  $allStoriesList.show();
+}

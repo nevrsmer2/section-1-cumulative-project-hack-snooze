@@ -54,6 +54,7 @@ $(".nav-submit").on("click", function () {
 //Favorites are added to .stories-container container
 //Favorits list is posted to
 $(".nav-favorites").on("click", function () {
+  myFavStories();
   // alert("I clicked Favorites");
 });
 
