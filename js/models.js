@@ -77,7 +77,18 @@ class StoryList {
       token,
       story: newStory,
     });
-    console.log(response);
+  }
+
+  //My code to dete a story in My Stories
+  async deleteStory(user, storyId) {
+    const token = user.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: {
+        token,
+      },
+    });
   }
 }
 
@@ -158,6 +169,7 @@ class User {
         favorites: user.favorites,
         ownStories: user.stories,
       },
+
       response.data.token
     );
   }
@@ -189,6 +201,34 @@ class User {
     } catch (err) {
       console.error("loginViaStoredCredentials failed", err);
       return null;
+    }
+  }
+
+  // POST favotie story to API
+  async addToFavorites(story) {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+        { token: this.loginToken }
+      );
+      this.favorites.push(story);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  //DELETE favorite story in API
+  async removeFavorite(story) {
+    try {
+      const response = await axios({
+        url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+        method: "DELETE",
+        data: {
+          token: this.loginToken,
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
     }
   }
 }

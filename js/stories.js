@@ -20,12 +20,12 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
-
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-<i class="fa-star ${isFavorite(story) ? "fas" : "far"}"></i>
+<i class="fa-star ${isFavorite(story) ? "fas" : "far"}" data-id="${
+    story.storyId
+  }"></i>
       <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -68,8 +68,6 @@ async function submitStory(e) {
     },
   };
   const postResponse = await storyList.addStory(data.user, data.newStory);
-  console.log(postResponse);
-
   $(".submit-story-form")[0].reset();
   $(".submit-story-form").hide();
 }
@@ -82,11 +80,13 @@ async function renderMyStories() {
   // loop through all of our stories and generate HTML for them
   for (let story of currentUser.ownStories) {
     const $story = generateStoryMarkup(story);
+    $story.prepend(
+      $("<i>").data("id", story.storyId).addClass("fas fa-trash-alt")
+    );
     $allStoriesList.append($story);
   }
 
   $allStoriesList.show();
-  console.log("Current User:", currentUser);
 }
 
 //Return boolean based on star's status - marked or not marked as favorite
@@ -100,9 +100,19 @@ function isFavorite(story) {
   return isFav;
 }
 
-//Show star based on ...
+//Show/hide favorite status & invoke functions to add/delete favorite stories in favorites []
 function updateFavorite(e) {
-  console.log("E:", $(e.target).hasClass("fas"));
+  const $storyId = $(e.target).data("id");
+  const $isFavorite = $(e.target).hasClass("fas");
+  let story = storyList.stories.find((item) => {
+    return item.storyId === $storyId;
+  });
+  $(e.target).toggleClass("fas far");
+  if ($isFavorite) {
+    currentUser.removeFavorite(story);
+  } else {
+    currentUser.addToFavorites(story);
+  }
 }
 
 //Add event listener to star element and call updaeFavorite function
@@ -122,3 +132,8 @@ async function myFavStories() {
 
   $allStoriesList.show();
 }
+
+// //Add event listener  to trash can and invoke deleteStory()
+$allStoriesList.on("click", ".fa-trash-alt", async (e) => {
+  await storyList.deleteStory(currentUser, $(e.target).data("id"));
+});
